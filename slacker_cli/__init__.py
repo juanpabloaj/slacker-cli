@@ -6,6 +6,7 @@
 
 from slacker import Slacker
 import argparse
+from rcfile import rcfile
 import sys
 
 
@@ -16,8 +17,11 @@ def main():
     parser.add_argument("-t", "--token", help="Slack token")
 
     args = parser.parse_args()
-    token = args.token
-    channel = args.channel
+    rcargs = rcfile( "slacker", args.__dict__ )
+
+    token = args.token or rcargs['token']
+    channel = args.channel or rcargs['channel']
+
 
     if not token or not channel:
         exit(1)
