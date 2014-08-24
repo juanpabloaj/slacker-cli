@@ -17,4 +17,4 @@ Installation
 
 ::
 
-    pip install slack-cli
+    pip install slacker-cli
