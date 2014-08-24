@@ -2,6 +2,9 @@
 slacker-cli
 ===========
 
+.. image:: https://travis-ci.org/juanpabloaj/slacker-cli.svg?branch=master
+    :target: https://travis-ci.org/juanpabloaj/slacker-cli
+
 Send messages to `Slack <https://slack.com/>`_ from command line.
 
 Usage
