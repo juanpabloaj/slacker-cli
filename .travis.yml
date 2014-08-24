@@ -1,0 +1,10 @@
+language: python
+python:
+  - 2.7
+install:
+  - pip install -r requirements-dev.txt
+script:
+  - nosetests
+  - flake8 slacker_cli tests
+after_script:
+  - coveralls --verbose
