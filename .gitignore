@@ -52,3 +52,7 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# ignore nodejs utils
+node_modules
+Gruntfile.js
+package.json
