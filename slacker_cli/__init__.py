@@ -17,11 +17,12 @@ def main():
 
     args = parser.parse_args()
     token = args.token
-    channel = '#{}'.format(args.channel)
+    channel = args.channel
 
     if not token or not channel:
         exit(1)
 
+    channel = '#{}'.format(channel)
     message = sys.stdin
 
     slack = Slacker(token)
