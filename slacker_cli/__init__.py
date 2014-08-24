@@ -8,6 +8,11 @@ from slacker import Slacker
 import argparse
 import sys
 
+def post_message(token, channel, message):
+    channel = '#{}'.format(channel)
+
+    slack = Slacker(token)
+    slack.chat.post_message(channel, message)
 
 def main():
 
@@ -22,12 +27,9 @@ def main():
     if not token or not channel:
         exit(1)
 
-    channel = '#{}'.format(channel)
     message = sys.stdin
 
-    slack = Slacker(token)
-
-    slack.chat.post_message(channel, message)
+    post_message(token, channel, message)
 
 
 if __name__ == '__main__':
