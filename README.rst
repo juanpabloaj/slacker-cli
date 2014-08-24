@@ -2,7 +2,7 @@
 slacker-cli
 ===========
 
-Send messages to `Slack <https://slack.com/>` from command line.
+Send messages to `Slack <https://slack.com/>`_ from command line.
 
 Usage
 =====
