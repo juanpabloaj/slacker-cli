@@ -4,7 +4,7 @@ python:
 install:
   - pip install -r requirements-dev.txt
 script:
-  - nosetests
+  - nosetests --with-coverage
   - flake8 slacker_cli tests
 after_script:
   - coveralls --verbose
