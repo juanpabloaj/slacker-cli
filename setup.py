@@ -4,6 +4,7 @@
 import os
 from setuptools import setup
 
+
 def read(*paths):
     """ read files """
     with open(os.path.join(*paths), 'r') as filename:
@@ -30,4 +31,3 @@ setup(
         'Programming Language :: Python :: 2.7',
     ]
 )
-
