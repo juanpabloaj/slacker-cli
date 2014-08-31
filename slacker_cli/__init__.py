@@ -45,11 +45,11 @@ def main():
     parser.add_argument("-t", "--token", help="Slack token")
 
     token, channel = args_priority(parser.parse_args(), os.environ)
+    message = sys.stdin.read()
 
-    if not token or not channel:
-        exit(1)
+    if not token or not channel or not message:
+        sys.exit(1)
 
-    message = sys.stdin
     post_message(token, channel, message)
 
 
