@@ -30,6 +30,10 @@ You can set ``SLACK_TOKEN`` in your ``~/.bashrc``
 
     date | slacker -c slack_channel
 
+Upload file to channel::
+
+    date | slacker -c slack_channel -f image.png
+
 Installation
 ============
 

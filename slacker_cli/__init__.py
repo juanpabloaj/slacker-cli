@@ -17,6 +17,24 @@ def post_message(token, channel, message):
     slack.chat.post_message(channel, message)
 
 
+def get_channel_id(token, channel_name):
+    slack = Slacker(token)
+    channels = slack.channels.list().body['channels']
+    for channel in channels:
+        name, channel_id = channel['name'], channel['id']
+        if name == channel_name:
+            return channel_id
+
+
+def upload_file(token, channel, file_name):
+    """ upload file to a channel """
+
+    slack = Slacker(token)
+    channel_id = get_channel_id(token, channel)
+
+    slack.files.upload(file_name, channels=channel_id)
+
+
 def args_priority(args, environ):
     '''
         priority of token
@@ -43,14 +61,19 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--channel", help="Slack channel")
     parser.add_argument("-t", "--token", help="Slack token")
+    parser.add_argument("-f", "--file", help="File to upload")
 
-    token, channel = args_priority(parser.parse_args(), os.environ)
+    args = parser.parse_args()
+
+    token, channel = args_priority(args, os.environ)
     message = sys.stdin.read()
+    file_name = args.file
 
-    if not token or not channel or not message:
-        sys.exit(1)
+    if token and channel and message:
+        post_message(token, channel, message)
 
-    post_message(token, channel, message)
+    if token and channel and file_name:
+        upload_file(token, channel, file_name)
 
 
 if __name__ == '__main__':
