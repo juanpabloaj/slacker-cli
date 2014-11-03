@@ -56,3 +56,7 @@ docs/_build/
 node_modules
 Gruntfile.js
 package.json
+
+# images
+*.png
+*.jpeg
