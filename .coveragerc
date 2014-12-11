@@ -4,3 +4,5 @@ exclude_lines =
 omit =
     */python?.?/*
     */site-packages/nose/*
+    */pypy/*
+    */pypy-?.?.?/*
