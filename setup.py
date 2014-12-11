@@ -5,6 +5,12 @@ import os
 from setuptools import setup
 
 
+install_requires = ['slacker >= 0.0.3']
+try:
+    import argparse
+except ImportError:
+    install_requires.append('argparse')
+
 def read(*paths):
     """ read files """
     with open(os.path.join(*paths), 'r') as filename:
@@ -16,7 +22,7 @@ setup(
     description="Send messages to slack from command line",
     long_description=(read('README.rst')),
     url="https://github.com/juanpabloaj/slacker-cli",
-    install_requires=['slacker >= 0.0.3'],
+    install_requires=install_requires,
     license='MIT',
     author="JuanPablo AJ",
     author_email="jpabloaj@gmail.com",
