@@ -11,7 +11,7 @@ import os
 
 
 def post_message(token, channel, message):
-    channel = '#{}'.format(channel)
+    channel = '#{0}'.format(channel)
 
     slack = Slacker(token)
     slack.chat.post_message(channel, message)
