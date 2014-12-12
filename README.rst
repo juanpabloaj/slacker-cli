@@ -42,3 +42,9 @@ Installation
 .. code-block:: bash
 
     pip install slacker-cli
+
+Contributors
+============
+
+- `JuanPablo AJ <https://github.com/juanpabloaj>`_
+- `Marc Abramowitz <https://github.com/msabramo>`_
