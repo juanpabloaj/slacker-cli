@@ -11,8 +11,6 @@ import os
 
 
 def post_message(token, channel, message):
-    channel = '#{0}'.format(channel)
-
     slack = Slacker(token)
     slack.chat.post_message(channel, message)
 
@@ -24,6 +22,15 @@ def get_channel_id(token, channel_name):
         name, channel_id = channel['name'], channel['id']
         if name == channel_name:
             return channel_id
+
+
+def get_user_id(token, user_name):
+    slack = Slacker(token)
+    members = slack.users.list().body['members']
+    for member in members:
+        name, user_id = member['name'], member['id']
+        if name == user_name:
+            return user_id
 
 
 def upload_file(token, channel, file_name):
@@ -53,24 +60,28 @@ def args_priority(args, environ):
     if arg_token:
         token = arg_token
 
-    return token, args.channel
+    return token, args.channel, args.user
 
 
 def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--channel", help="Slack channel")
+    parser.add_argument("-u", "--user", help="Slack user")
     parser.add_argument("-t", "--token", help="Slack token")
     parser.add_argument("-f", "--file", help="File to upload")
 
     args = parser.parse_args()
 
-    token, channel = args_priority(args, os.environ)
+    token, channel, user = args_priority(args, os.environ)
     message = sys.stdin.read()
     file_name = args.file
 
     if token and channel and message:
-        post_message(token, channel, message)
+        post_message(token, '#' + channel, message)
+
+    if token and user and message:
+        post_message(token, get_user_id(token, user), message)
 
     if token and channel and file_name:
         upload_file(token, channel, file_name)
