@@ -30,6 +30,12 @@ You can set ``SLACK_TOKEN`` in your ``~/.bashrc``
 
     date | slacker -c slack_channel
 
+Send message to user
+
+.. code-block:: bash
+
+    date | slacker -u user_name
+
 Upload file to channel:
 
 .. code-block:: bash
@@ -48,3 +54,4 @@ Contributors
 
 - `JuanPablo AJ <https://github.com/juanpabloaj>`_
 - `Marc Abramowitz <https://github.com/msabramo>`_
+- `David Yen <https://github.com/davidyen1124>`_
