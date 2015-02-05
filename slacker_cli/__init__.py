@@ -60,7 +60,7 @@ def args_priority(args, environ):
     if arg_token:
         token = arg_token
 
-    return token, args.channel, args.user
+    return token, args.channel
 
 
 def main():
@@ -73,7 +73,8 @@ def main():
 
     args = parser.parse_args()
 
-    token, channel, user = args_priority(args, os.environ)
+    token, channel = args_priority(args, os.environ)
+    user = args.user
     message = sys.stdin.read()
     file_name = args.file
 

@@ -22,7 +22,7 @@ class TestMessage(unittest.TestCase):
     @patch('slacker_cli.Slacker')
     def test_post_message_use_channel_name(self, mock_slacker):
         token = 'aaa'
-        channel = 'channel_name'
+        channel = '#channel_name'
         message = 'message string'
 
         post_message(token, channel, message)
