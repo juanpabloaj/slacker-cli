@@ -5,6 +5,17 @@ import unittest
 from mock import patch
 
 from slacker_cli import get_channel_id
+from slacker_cli import id_from_list_dict
+
+
+class TestUtils(unittest.TestCase):
+
+    def test_id_from_list_dict(self):
+        list_dict = [{'name': 'channel_name', 'id': '123'}, {}]
+
+        self.assertEqual(
+            '123', id_from_list_dict(list_dict, 'channel_name')
+        )
 
 
 class TestChannels(unittest.TestCase):

@@ -10,6 +10,12 @@ import sys
 import os
 
 
+def id_from_list_dict(list_dict, key_name):
+    for d in list_dict:
+        if d['name'] == key_name:
+            return d['id']
+
+
 def post_message(token, channel, message):
     slack = Slacker(token)
     slack.chat.post_message(channel, message)
@@ -18,19 +24,13 @@ def post_message(token, channel, message):
 def get_channel_id(token, channel_name):
     slack = Slacker(token)
     channels = slack.channels.list().body['channels']
-    for channel in channels:
-        name, channel_id = channel['name'], channel['id']
-        if name == channel_name:
-            return channel_id
+    return id_from_list_dict(channels, channel_name)
 
 
 def get_user_id(token, user_name):
     slack = Slacker(token)
     members = slack.users.list().body['members']
-    for member in members:
-        name, user_id = member['name'], member['id']
-        if name == user_name:
-            return user_id
+    return id_from_list_dict(members, user_name)
 
 
 def upload_file(token, channel, file_name):
