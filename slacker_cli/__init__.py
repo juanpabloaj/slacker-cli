@@ -27,12 +27,6 @@ def get_channel_id(token, channel_name):
     return id_from_list_dict(channels, channel_name)
 
 
-def get_user_id(token, user_name):
-    slack = Slacker(token)
-    members = slack.users.list().body['members']
-    return id_from_list_dict(members, user_name)
-
-
 def upload_file(token, channel, file_name):
     """ upload file to a channel """
 
@@ -82,7 +76,7 @@ def main():
         post_message(token, '#' + channel, message)
 
     if token and user and message:
-        post_message(token, get_user_id(token, user), message)
+        post_message(token, '@' + user, message)
 
     if token and channel and file_name:
         upload_file(token, channel, file_name)
