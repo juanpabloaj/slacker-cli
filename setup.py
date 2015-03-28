@@ -5,11 +5,12 @@ import os
 from setuptools import setup
 
 
-install_requires = ['slacker >= 0.0.3']
+install_requires = ['slacker >= 0.5.7']
 try:
     import argparse
 except ImportError:
     install_requires.append('argparse')
+
 
 def read(*paths):
     """ read files """

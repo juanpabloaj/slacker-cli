@@ -5,15 +5,10 @@
 """
 
 from slacker import Slacker
+from slacker.utils import get_item_id_by_name
 import argparse
 import sys
 import os
-
-
-def id_from_list_dict(list_dict, key_name):
-    for d in list_dict:
-        if d['name'] == key_name:
-            return d['id']
 
 
 def post_message(token, channel, message):
@@ -24,7 +19,7 @@ def post_message(token, channel, message):
 def get_channel_id(token, channel_name):
     slack = Slacker(token)
     channels = slack.channels.list().body['channels']
-    return id_from_list_dict(channels, channel_name)
+    return get_item_id_by_name(channels, channel_name)
 
 
 def upload_file(token, channel, file_name):
