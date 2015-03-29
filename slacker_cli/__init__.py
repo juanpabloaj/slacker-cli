@@ -9,6 +9,8 @@ from slacker.utils import get_item_id_by_name
 import argparse
 import sys
 import os
+import warnings
+warnings.filterwarnings('ignore', message=".*InsecurePlatformWarning.*")
 
 
 def post_message(token, channel, message):
