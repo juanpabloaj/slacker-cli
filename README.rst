@@ -6,8 +6,6 @@ slacker-cli
     :target: https://travis-ci.org/juanpabloaj/slacker-cli
 .. image:: https://coveralls.io/repos/juanpabloaj/slacker-cli/badge.png?branch=master
     :target: https://coveralls.io/r/juanpabloaj/slacker-cli?branch=master
-.. image:: https://pypip.in/v/slacker-cli/badge.png
-    :target: https://pypi.python.org/pypi/slacker-cli
 
 
 Send messages to `Slack <https://slack.com/>`_ from command line.
