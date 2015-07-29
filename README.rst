@@ -42,6 +42,12 @@ Upload file to channel:
 
     date | slacker -c slack_channel -f image.png
 
+Add sender name and emoji avatar:
+
+.. code-block:: bash
+
+    date | slacker -n SlackerBot -i :dancer:
+
 Installation
 ============
 
