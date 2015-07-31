@@ -62,3 +62,4 @@ Contributors
 - `Marc Abramowitz <https://github.com/msabramo>`_
 - `David Yen <https://github.com/davidyen1124>`_
 - `Valentin Lab <https://github.com/vaab>`_
+- `Alex Jurkiewicz <https://github.com/alexjurkiewicz>`_
