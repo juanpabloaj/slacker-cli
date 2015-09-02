@@ -63,3 +63,4 @@ Contributors
 - `David Yen <https://github.com/davidyen1124>`_
 - `Valentin Lab <https://github.com/vaab>`_
 - `Alex Jurkiewicz <https://github.com/alexjurkiewicz>`_
+- `Kentaro Wada <https://github.com/wkentaro>`_

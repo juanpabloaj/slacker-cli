@@ -5,7 +5,7 @@ import os
 from setuptools import setup
 
 
-install_requires = ['slacker >= 0.5.7']
+install_requires = ['slacker >= 0.7.3']
 try:
     import argparse
 except ImportError:
@@ -19,7 +19,7 @@ def read(*paths):
 
 setup(
     name="slacker-cli",
-    version="0.2.0",
+    version="0.2.1",
     description="Send messages to slack from command line",
     long_description=(read('README.rst')),
     url="https://github.com/juanpabloaj/slacker-cli",
