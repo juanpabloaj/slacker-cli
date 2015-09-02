@@ -13,9 +13,10 @@ import warnings
 warnings.filterwarnings('ignore', message=".*InsecurePlatformWarning.*")
 
 
-def post_message(token, channel, message, name, icon):
+def post_message(token, channel, message, name, as_user, icon):
     slack = Slacker(token)
-    slack.chat.post_message(channel, message, username=name, icon_emoji=icon)
+    slack.chat.post_message(channel, message, username=name,
+                            as_user=as_user, icon_emoji=icon)
 
 
 def get_channel_id(token, channel_name):
@@ -38,9 +39,14 @@ def args_priority(args, environ):
         priority of token
         1) as argumment: -t
         2) as environ variable
+
+        priority of as_user
+        1) as argument: -a
+        2) as environ variable
     '''
 
     arg_token = args.token
+    arg_as_user = args.as_user
 
     slack_token_var_name = 'SLACK_TOKEN'
     if slack_token_var_name in environ.keys():
@@ -51,7 +57,14 @@ def args_priority(args, environ):
     if arg_token:
         token = arg_token
 
-    return token, args.channel
+    # slack as_user
+    slack_as_user_var_name = 'SLACK_USERNAME'
+    as_user = environ.get(slack_as_user_var_name)
+
+    if arg_as_user:
+        as_user = arg_as_user
+
+    return token, as_user, args.channel
 
 
 def main():
@@ -62,11 +75,12 @@ def main():
     parser.add_argument("-t", "--token", help="Slack token")
     parser.add_argument("-f", "--file", help="File to upload")
     parser.add_argument("-n", "--name", help="Sender name")
+    parser.add_argument("-a", "--as-user", help="As user")
     parser.add_argument("-i", "--icon-emoji", help="Sender emoji icon")
 
     args = parser.parse_args()
 
-    token, channel = args_priority(args, os.environ)
+    token, as_user, channel = args_priority(args, os.environ)
     user = args.user
     name = args.name
     icon = args.icon_emoji
@@ -74,10 +88,10 @@ def main():
     file_name = args.file
 
     if token and channel and message:
-        post_message(token, '#' + channel, message, name, icon)
+        post_message(token, '#' + channel, message, name, as_user, icon)
 
     if token and user and message:
-        post_message(token, '@' + user, message, name, icon)
+        post_message(token, '@' + user, message, name, as_user, icon)
 
     if token and channel and file_name:
         upload_file(token, channel, file_name)
