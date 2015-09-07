@@ -58,11 +58,11 @@ def args_priority(args, environ):
         token = arg_token
 
     # slack as_user
-    slack_as_user_var_name = 'SLACK_USERNAME'
-    as_user = environ.get(slack_as_user_var_name)
+    slack_as_user_var_name = 'SLACK_AS_USER'
+    as_user = bool(environ.get(slack_as_user_var_name))
 
     if arg_as_user:
-        as_user = arg_as_user
+        as_user = True
 
     return token, as_user, args.channel
 
@@ -75,7 +75,7 @@ def main():
     parser.add_argument("-t", "--token", help="Slack token")
     parser.add_argument("-f", "--file", help="File to upload")
     parser.add_argument("-n", "--name", help="Sender name")
-    parser.add_argument("-a", "--as-user", help="As user")
+    parser.add_argument("-a", "--as-user", action="store_true", help="As user")
     parser.add_argument("-i", "--icon-emoji", help="Sender emoji icon")
 
     args = parser.parse_args()
