@@ -15,7 +15,7 @@ class TestMessage(unittest.TestCase):
         channel = 'channel_name'
         message = 'message string'
         sender_name = None
-        as_user = None
+        as_user = False
         sender_icon = None
 
         post_message(token, channel, message,
@@ -29,7 +29,7 @@ class TestMessage(unittest.TestCase):
         channel = '#channel_name'
         message = 'message string'
         sender_name = None
-        as_user = None
+        as_user = False
         sender_icon = None
 
         post_message(token, channel, message,
@@ -37,7 +37,7 @@ class TestMessage(unittest.TestCase):
 
         mock_slacker.return_value.chat.post_message\
             .assert_called_with('#channel_name', message,
-                                username=None, as_user=None,
+                                username=None, as_user=False,
                                 icon_emoji=None)
 
     @patch('slacker_cli.Slacker')
@@ -46,7 +46,7 @@ class TestMessage(unittest.TestCase):
         channel = '#channel_name'
         message = 'message string'
         sender_name = 'test bot'
-        as_user = 'real user'
+        as_user = True
         sender_icon = ':dancer:'
 
         post_message(token, channel, message,

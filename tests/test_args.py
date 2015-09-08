@@ -13,50 +13,50 @@ class TestArgs(TestCase):
 
     def test_args_priority_first_token_as_argument(self):
         self.parser.token = 'arg_token'
-        self.parser.as_user = 'arg_as_user'
+        self.parser.as_user = True
         self.parser.channel = 'channel'
         args = self.parser
         environ = {'SLACK_TOKEN': 'env_token',
-                   'SLACK_USERNAME': 'env_username'}
+                   'SLACK_AS_USER': 1}
 
         self.assertEqual(
-            ('arg_token', 'arg_as_user', 'channel'),
+            ('arg_token', True, 'channel'),
             args_priority(args, environ)
         )
 
     def test_args_priority_only_env_token(self):
         self.parser.token = None
-        self.parser.as_user = None
+        self.parser.as_user = False
         self.parser.channel = 'channel'
         args = self.parser
         environ = {'SLACK_TOKEN': 'env_token',
-                   'SLACK_USERNAME': 'env_username'}
+                   'SLACK_AS_USER': 1}
 
         self.assertEqual(
-            ('env_token', 'env_username', 'channel'),
+            ('env_token', 1, 'channel'),
             args_priority(args, environ)
         )
 
     def test_args_priority_only_arg_token(self):
         self.parser.token = 'arg_token'
-        self.parser.as_user = 'arg_username'
+        self.parser.as_user = True
         self.parser.channel = 'channel'
         args = self.parser
         environ = {}
 
         self.assertEqual(
-            ('arg_token', 'arg_username', 'channel'),
+            ('arg_token', True, 'channel'),
             args_priority(args, environ)
         )
 
     def test_args_priority_empty_args(self):
         self.parser.token = None
-        self.parser.as_user = None
+        self.parser.as_user = False
         self.parser.channel = None
         args = self.parser
         environ = {}
 
         self.assertEqual(
-            (None, None, None),
+            (None, False, None),
             args_priority(args, environ)
         )
