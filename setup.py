@@ -19,7 +19,7 @@ def read(*paths):
 
 setup(
     name="slacker-cli",
-    version="0.2.1",
+    version="0.2.2",
     description="Send messages to slack from command line",
     long_description=(read('README.rst')),
     url="https://github.com/juanpabloaj/slacker-cli",
