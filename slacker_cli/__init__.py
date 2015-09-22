@@ -5,7 +5,7 @@
 """
 
 from slacker import Slacker
-from slacker.utils import get_item_id_by_name
+from slacker.utils import get_item_id_by_name, get_item_by_key_value
 import argparse
 import sys
 import os
@@ -17,6 +17,14 @@ def post_message(token, channel, message, name, as_user, icon):
     slack = Slacker(token)
     slack.chat.post_message(channel, message, username=name,
                             as_user=as_user, icon_emoji=icon)
+
+
+def get_im_id(token, username):
+    slack = Slacker(token)
+    members = slack.users.list().body['members']
+    user_id = get_item_id_by_name(members, username)
+    ims = slack.im.list().body['ims']
+    return get_item_by_key_value(ims, key='user', value=user_id).get('id')
 
 
 def get_channel_id(token, channel_name):
@@ -91,7 +99,9 @@ def main():
         post_message(token, '#' + channel, message, name, as_user, icon)
 
     if token and user and message:
-        post_message(token, '@' + user, message, name, as_user, icon)
+        im_id = get_im_id(token, user)
+        channel = im_id or '@' + user  # allow user send DM to slackbot
+        post_message(token, channel, message, name, as_user, icon)
 
     if token and channel and file_name:
         upload_file(token, channel, file_name)
