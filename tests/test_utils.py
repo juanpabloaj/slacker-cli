@@ -4,11 +4,7 @@
 import unittest
 from mock import patch
 
-<<<<<<< Updated upstream
-from slacker_cli import get_channel_id
-=======
 from slacker_cli import get_channel_id, get_im_id, get_item_by_key_value
->>>>>>> Stashed changes
 
 
 class TestChannels(unittest.TestCase):
@@ -46,3 +42,11 @@ class TestChannels(unittest.TestCase):
         self.assertEqual(
             'IM111', get_im_id('aaa', 'bob')
         )
+
+    def test_get_item_by_key_value(self):
+            list_dict = [{'user': 'user_id_1', 'id': '123'}, {}]
+
+            self.assertEqual(
+                '123',
+                get_item_by_key_value(list_dict, 'user', 'user_id_1')['id'],
+            )

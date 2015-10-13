@@ -5,12 +5,21 @@
 """
 
 from slacker import Slacker
-from slacker.utils import get_item_id_by_name, get_item_by_key_value
+from slacker.utils import get_item_id_by_name
 import argparse
 import sys
 import os
 import warnings
 warnings.filterwarnings('ignore', message=".*InsecurePlatformWarning.*")
+
+
+# This function will be removed after below PR is merged:
+# https://github.com/os/slacker/pull/46
+def get_item_by_key_value(list_dict, key, value):
+    for d in list_dict:
+        if d[key] == value:
+            return d
+    return {}
 
 
 def post_message(token, channel, message, name, as_user, icon):
