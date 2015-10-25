@@ -1,1 +1,2 @@
-slacker==0.5.7
+slacker>=0.7.3
+requests
