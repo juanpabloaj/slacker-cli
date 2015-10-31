@@ -20,7 +20,7 @@ except ImportError:
 
 setup(
     name="slacker-cli",
-    version="0.2.6",
+    version="0.2.7",
     description="Send messages to slack from command line",
     long_description=(read('README.rst')),
     url="https://github.com/juanpabloaj/slacker-cli",
