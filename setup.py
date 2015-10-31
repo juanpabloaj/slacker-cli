@@ -11,7 +11,7 @@ def read(*paths):
         return filename.read()
 
 
-install_requires = ['slacker >= 0.7.3']
+install_requires = read('requirements.txt').splitlines()
 try:
     import argparse
 except ImportError:
