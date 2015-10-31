@@ -6,9 +6,14 @@
 
 from slacker import Slacker
 from slacker.utils import get_item_id_by_name
+import requests
 import argparse
 import sys
 import os
+try:
+    from urllib import quote as urllib_quote
+except ImportError:
+    from urllib.parse import quote as urllib_quote
 import warnings
 warnings.filterwarnings('ignore', message=".*InsecurePlatformWarning.*")
 
@@ -22,10 +27,27 @@ def get_item_by_key_value(list_dict, key, value):
     return {}
 
 
-def post_message(token, channel, message, name, as_user, icon):
-    slack = Slacker(token)
-    slack.chat.post_message(channel, message, username=name,
-                            as_user=as_user, icon_emoji=icon)
+def post_message(token, channel, message, name, as_user, icon,
+                 as_slackbot, team):
+    if as_slackbot:
+        post_message_as_slackbot(team, token, channel, message)
+    else:
+        slack = Slacker(token)
+        slack.chat.post_message(channel, message, username=name,
+                                as_user=as_user, icon_emoji=icon)
+
+
+class SlackerCliError(Exception):
+    pass
+
+
+def post_message_as_slackbot(team, token, channel, message):
+    url = 'https://{team}.slack.com/services/hooks/slackbot'
+    url += '?token={token}&channel={channel}'
+    url = url.format(team=team, token=token, channel=urllib_quote(channel))
+    res = requests.post(url, message)
+    if res.status_code != 200:
+        raise SlackerCliError("{0}:'{1}'".format(res.content, url))
 
 
 def get_im_id(token, username):
@@ -94,23 +116,42 @@ def main():
     parser.add_argument("-n", "--name", help="Sender name")
     parser.add_argument("-a", "--as-user", action="store_true", help="As user")
     parser.add_argument("-i", "--icon-emoji", help="Sender emoji icon")
+    parser.add_argument("-s", "--as-slackbot", action="store_true",
+                        help="Send as Slackbot")
+    parser.add_argument("-m", "--team", help="Slack team")
 
     args = parser.parse_args()
 
-    token, as_user, channel = args_priority(args, os.environ)
     user = args.user
-    name = args.name
-    icon = args.icon_emoji
     message = sys.stdin.read()
-    file_name = args.file
+    as_slackbot = args.as_slackbot
+    if as_slackbot:
+        token = args.token or os.environ.get('SLACKBOT_TOKEN')
+        as_user = False
+        channel = args.channel
+        name = None
+        icon = None
+        file_name = None
+        team = args.team or os.environ.get('SLACK_TEAM')
+    else:
+        token, as_user, channel = args_priority(args, os.environ)
+        name = args.name
+        icon = args.icon_emoji
+        file_name = args.file
+        team = None
 
     if token and channel and message:
-        post_message(token, '#' + channel, message, name, as_user, icon)
+        post_message(token, '#' + channel, message, name, as_user, icon,
+                     as_slackbot, team)
 
     if token and user and message:
-        im_id = get_im_id(token, user)
-        channel = im_id or '@' + user  # allow user send DM to slackbot
-        post_message(token, channel, message, name, as_user, icon)
+        if as_slackbot:
+            channel = '@' + user
+        else:
+            im_id = get_im_id(token, user)
+            channel = im_id or '@' + user  # allow user send DM to slackbot
+        post_message(token, channel, message, name, as_user, icon,
+                     as_slackbot, team)
 
     if token and channel and file_name:
         upload_file(token, channel, file_name)

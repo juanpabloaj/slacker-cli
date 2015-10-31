@@ -5,17 +5,18 @@ import os
 from setuptools import setup
 
 
-install_requires = ['slacker >= 0.7.3']
+def read(*paths):
+    """ read files """
+    with open(os.path.join(*paths), 'r') as filename:
+        return filename.read()
+
+
+install_requires = read('requirements.txt').splitlines()
 try:
     import argparse
 except ImportError:
     install_requires.append('argparse')
 
-
-def read(*paths):
-    """ read files """
-    with open(os.path.join(*paths), 'r') as filename:
-        return filename.read()
 
 setup(
     name="slacker-cli",
