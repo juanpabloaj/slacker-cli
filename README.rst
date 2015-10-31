@@ -17,7 +17,7 @@ Usage
 
     date | slacker -c slack_channel -t slack_token
 
-Slack Token can be called from a enviroment variable, called ``SLACK_TOKEN``.
+`Slack Token <https://api.slack.com/web#authentication>`_ can be called from a enviroment variable, called ``SLACK_TOKEN``.
 
 You can set ``SLACK_TOKEN`` in your ``~/.bashrc``
 
