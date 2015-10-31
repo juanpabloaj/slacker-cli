@@ -11,7 +11,6 @@ def read(*paths):
         return filename.read()
 
 
-install_requires = read('requirements.txt').splitlines()
 install_requires = ['slacker >= 0.7.3']
 try:
     import argparse
@@ -21,7 +20,7 @@ except ImportError:
 
 setup(
     name="slacker-cli",
-    version="0.2.5",
+    version="0.2.6",
     description="Send messages to slack from command line",
     long_description=(read('README.rst')),
     url="https://github.com/juanpabloaj/slacker-cli",
