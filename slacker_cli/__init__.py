@@ -64,13 +64,12 @@ def get_channel_id(token, channel_name):
     return get_item_id_by_name(channels, channel_name)
 
 
-def upload_file(token, channel, file_name):
+def upload_file(token, channel_name, file_name):
     """ upload file to a channel """
 
     slack = Slacker(token)
-    channel_id = get_channel_id(token, channel)
 
-    slack.files.upload(file_name, channels=channel_id)
+    slack.files.upload(file_name, channels=channel_name)
 
 
 def args_priority(args, environ):
@@ -153,8 +152,11 @@ def main():
         post_message(token, channel, message, name, as_user, icon,
                      as_slackbot, team)
 
-    if token and channel and file_name:
-        upload_file(token, channel, file_name)
+    if token and file_name:
+        if user:
+            upload_file(token, '@' + user, file_name)
+        elif channel:
+            upload_file(token, '#' + channel, file_name)
 
 
 if __name__ == '__main__':
