@@ -71,13 +71,14 @@ def upload_file(token, channel_name, file_name):
 
     slack.files.upload(file_name, channels=channel_name)
 
+
 def args_to_dict(lst):
     ret = {}
     for item in lst:
         # skip args with bad syntax
         if item.count('=') < 1:
             continue
-        k,v = item.split('=', 1)
+        k, v = item.split('=', 1)
         ret[k] = v
     return ret
 
