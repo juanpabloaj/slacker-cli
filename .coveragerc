@@ -1,6 +1,7 @@
 [report]
 exclude_lines =
     if __name__ == .__main__.:
+    def main
 omit =
     */python?.?/*
     */site-packages/nose/*
