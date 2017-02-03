@@ -58,9 +58,10 @@ Installation
 Contributors
 ============
 
-- `JuanPablo AJ <https://github.com/juanpabloaj>`_
-- `Marc Abramowitz <https://github.com/msabramo>`_
-- `David Yen <https://github.com/davidyen1124>`_
-- `Valentin Lab <https://github.com/vaab>`_
 - `Alex Jurkiewicz <https://github.com/alexjurkiewicz>`_
+- `David Yen <https://github.com/davidyen1124>`_
+- `Ethan Erchinger <https://github.com/erchn>`_
+- `JuanPablo AJ <https://github.com/juanpabloaj>`_
 - `Kentaro Wada <https://github.com/wkentaro>`_
+- `Marc Abramowitz <https://github.com/msabramo>`_
+- `Valentin Lab <https://github.com/vaab>`_
