@@ -1,2 +1,2 @@
-slacker>=0.7.3
+slacker==0.9.40
 requests
