@@ -4,9 +4,8 @@ slacker-cli
 
 .. image:: https://travis-ci.org/juanpabloaj/slacker-cli.svg?branch=master
     :target: https://travis-ci.org/juanpabloaj/slacker-cli
-.. image:: https://coveralls.io/repos/juanpabloaj/slacker-cli/badge.png?branch=master
+.. image:: https://coveralls.io/repos/juanpabloaj/slacker-cli/badge.svg?branch=master
     :target: https://coveralls.io/r/juanpabloaj/slacker-cli?branch=master
-
 
 Send messages to `Slack <https://slack.com/>`_ from command line.
 
@@ -17,7 +16,7 @@ Usage
 
     date | slacker -c slack_channel -t slack_token
 
-`Slack Token <https://api.slack.com/web#authentication>`_ can be called from a enviroment variable, called ``SLACK_TOKEN``.
+The `Slack token <https://api.slack.com/web#authentication>`_ can be called from an enviroment variable, called ``SLACK_TOKEN``.
 
 You can set ``SLACK_TOKEN`` in your ``~/.bashrc``
 
@@ -30,7 +29,7 @@ You can set ``SLACK_TOKEN`` in your ``~/.bashrc``
 
     date | slacker -c slack_channel
 
-Send message to user
+Send message to user:
 
 .. code-block:: bash
 
@@ -54,6 +53,11 @@ Installation
 .. code-block:: bash
 
     pip install slacker-cli
+
+Tokens
+======
+
+You can either `generate test tokens <https://api.slack.com/docs/oauth-test-tokens>`_ or  `create a bot user and use its token <https://my.slack.com/apps/A0F7YS25R-bots>`_.
 
 Contributors
 ============
