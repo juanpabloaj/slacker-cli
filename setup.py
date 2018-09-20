@@ -12,10 +12,6 @@ def read(*paths):
 
 
 install_requires = read('requirements.txt').splitlines()
-try:
-    import argparse
-except ImportError:
-    install_requires.append('argparse')
 
 
 setup(
@@ -35,12 +31,15 @@ setup(
             'slacker=slacker_cli:main',
         ],
     },
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
     classifiers=[
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ]
 )

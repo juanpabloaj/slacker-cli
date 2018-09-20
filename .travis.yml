@@ -1,15 +1,26 @@
 language: python
+cache: pip
+
 python:
   - 2.7
-  - 3.3
   - 3.4
   - 3.5
   - 3.6
   - pypy
+
+# Python 3.7 requires Xenial and sudo
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+      sudo: true
+
 install:
   - pip install -r requirements-dev.txt
+
 script:
   - nosetests --with-coverage
   - flake8 slacker_cli tests
+
 after_script:
   - coveralls --verbose
