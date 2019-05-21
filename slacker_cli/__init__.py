@@ -5,7 +5,7 @@
 """
 
 from slacker import Slacker
-from slacker.utils import get_item_id_by_name
+from slacker.utilities import get_item_id_by_name
 import requests
 import argparse
 import sys
