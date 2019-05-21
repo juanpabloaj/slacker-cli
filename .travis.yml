@@ -3,17 +3,15 @@ cache: pip
 
 python:
   - 2.7
-  - 3.4
   - 3.5
   - 3.6
   - pypy
 
-# Python 3.7 requires Xenial and sudo
+# Python 3.7 requires Xenial
 matrix:
   include:
     - python: 3.7
       dist: xenial
-      sudo: true
 
 install:
   - pip install -r requirements-dev.txt
