@@ -7,38 +7,34 @@ from setuptools import setup
 
 def read(*paths):
     """ read files """
-    with open(os.path.join(*paths), 'r') as filename:
+    with open(os.path.join(*paths), "r") as filename:
         return filename.read()
 
 
-install_requires = read('requirements.txt').splitlines()
+install_requires = read("requirements.txt").splitlines()
 
 
 setup(
     name="slacker-cli",
     version="0.4.1",
     description="Send messages to slack from command line",
-    long_description=(read('README.rst')),
+    long_description=(read("README.rst")),
     url="https://github.com/juanpabloaj/slacker-cli",
     install_requires=install_requires,
-    license='MIT',
+    license="MIT",
     author="JuanPablo AJ",
     author_email="jpabloaj@gmail.com",
-    packages=['slacker_cli'],
+    packages=["slacker_cli"],
     test_suite="tests",
-    entry_points={
-        'console_scripts': [
-            'slacker=slacker_cli:main',
-        ],
-    },
-    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
+    entry_points={"console_scripts": ["slacker=slacker_cli:main"]},
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     classifiers=[
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-    ]
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ],
 )

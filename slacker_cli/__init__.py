@@ -10,12 +10,14 @@ import requests
 import argparse
 import sys
 import os
+
 try:
     from urllib import quote as urllib_quote
 except ImportError:
     from urllib.parse import quote as urllib_quote
 import warnings
-warnings.filterwarnings('ignore', message=".*InsecurePlatformWarning.*")
+
+warnings.filterwarnings("ignore", message=".*InsecurePlatformWarning.*")
 
 
 # This function will be removed after below PR is merged:
@@ -27,14 +29,16 @@ def get_item_by_key_value(list_dict, key, value):
     return {}
 
 
-def post_message(token, channel, message, name, as_user, icon,
-                 as_slackbot, team, **kwargs):
+def post_message(
+    token, channel, message, name, as_user, icon, as_slackbot, team, **kwargs
+):
     if as_slackbot:
         post_message_as_slackbot(team, token, channel, message)
     else:
         slack = Slacker(token)
-        slack.chat.post_message(channel, message, username=name,
-                                as_user=as_user, icon_emoji=icon, **kwargs)
+        slack.chat.post_message(
+            channel, message, username=name, as_user=as_user, icon_emoji=icon, **kwargs
+        )
 
 
 class SlackerCliError(Exception):
@@ -42,8 +46,8 @@ class SlackerCliError(Exception):
 
 
 def post_message_as_slackbot(team, token, channel, message):
-    url = 'https://{team}.slack.com/services/hooks/slackbot'
-    url += '?token={token}&channel={channel}'
+    url = "https://{team}.slack.com/services/hooks/slackbot"
+    url += "?token={token}&channel={channel}"
     url = url.format(team=team, token=token, channel=urllib_quote(channel))
     res = requests.post(url, message)
     if res.status_code != 200:
@@ -52,15 +56,15 @@ def post_message_as_slackbot(team, token, channel, message):
 
 def get_im_id(token, username):
     slack = Slacker(token)
-    members = slack.users.list().body['members']
+    members = slack.users.list().body["members"]
     user_id = get_item_id_by_name(members, username)
-    ims = slack.im.list().body['ims']
-    return get_item_by_key_value(ims, key='user', value=user_id).get('id')
+    ims = slack.im.list().body["ims"]
+    return get_item_by_key_value(ims, key="user", value=user_id).get("id")
 
 
 def get_channel_id(token, channel_name):
     slack = Slacker(token)
-    channels = slack.channels.list().body['channels']
+    channels = slack.channels.list().body["channels"]
     return get_item_id_by_name(channels, channel_name)
 
 
@@ -76,15 +80,15 @@ def args_to_dict(lst):
     ret = {}
     for item in lst:
         # skip args with bad syntax
-        if item.count('=') < 1:
+        if item.count("=") < 1:
             continue
-        k, v = item.split('=', 1)
+        k, v = item.split("=", 1)
         ret[k] = v
     return ret
 
 
 def args_priority(args, environ):
-    '''
+    """
         priority of token
         1) as argumment: -t
         2) as environ variable
@@ -92,12 +96,12 @@ def args_priority(args, environ):
         priority of as_user
         1) as argument: -a
         2) as environ variable
-    '''
+    """
 
     arg_token = args.token
     arg_as_user = args.as_user
 
-    slack_token_var_name = 'SLACK_TOKEN'
+    slack_token_var_name = "SLACK_TOKEN"
     if slack_token_var_name in environ.keys():
         token = environ[slack_token_var_name]
     else:
@@ -107,7 +111,7 @@ def args_priority(args, environ):
         token = arg_token
 
     # slack as_user
-    slack_as_user_var_name = 'SLACK_AS_USER'
+    slack_as_user_var_name = "SLACK_AS_USER"
     as_user = bool(environ.get(slack_as_user_var_name))
 
     if arg_as_user:
@@ -126,13 +130,16 @@ def main():
     parser.add_argument("-n", "--name", help="Sender name")
     parser.add_argument("-a", "--as-user", action="store_true", help="As user")
     parser.add_argument("-i", "--icon-emoji", help="Sender emoji icon")
-    parser.add_argument("-s", "--as-slackbot", action="store_true",
-                        help="Send as Slackbot")
+    parser.add_argument(
+        "-s", "--as-slackbot", action="store_true", help="Send as Slackbot"
+    )
     parser.add_argument("-m", "--team", help="Slack team")
-    parser.add_argument("kwargs",
-                        help="Additional arguments to send to post_message",
-                        default=[],
-                        nargs=argparse.REMAINDER)
+    parser.add_argument(
+        "kwargs",
+        help="Additional arguments to send to post_message",
+        default=[],
+        nargs=argparse.REMAINDER,
+    )
 
     args = parser.parse_args()
 
@@ -142,13 +149,13 @@ def main():
     kwargs = args_to_dict(args.kwargs)
 
     if as_slackbot:
-        token = args.token or os.environ.get('SLACKBOT_TOKEN')
+        token = args.token or os.environ.get("SLACKBOT_TOKEN")
         as_user = False
         channel = args.channel
         name = None
         icon = None
         file_name = None
-        team = args.team or os.environ.get('SLACK_TEAM')
+        team = args.team or os.environ.get("SLACK_TEAM")
     else:
         token, as_user, channel = args_priority(args, os.environ)
         name = args.name
@@ -157,24 +164,34 @@ def main():
         team = None
 
     if token and channel and message:
-        post_message(token, '#' + channel, message, name, as_user, icon,
-                     as_slackbot, team, **kwargs)
+        post_message(
+            token,
+            "#" + channel,
+            message,
+            name,
+            as_user,
+            icon,
+            as_slackbot,
+            team,
+            **kwargs
+        )
 
     if token and user and message:
         if as_slackbot:
-            channel = '@' + user
+            channel = "@" + user
         else:
             im_id = get_im_id(token, user)
-            channel = im_id or '@' + user  # allow user send DM to slackbot
-        post_message(token, channel, message, name, as_user, icon,
-                     as_slackbot, team, **kwargs)
+            channel = im_id or "@" + user  # allow user send DM to slackbot
+        post_message(
+            token, channel, message, name, as_user, icon, as_slackbot, team, **kwargs
+        )
 
     if token and file_name:
         if user:
-            upload_file(token, '@' + user, file_name)
+            upload_file(token, "@" + user, file_name)
         elif channel:
-            upload_file(token, '#' + channel, file_name)
+            upload_file(token, "#" + channel, file_name)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
