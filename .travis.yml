@@ -15,10 +15,12 @@ matrix:
 
 install:
   - pip install -r requirements-dev.txt
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then pip install -U black; fi
 
 script:
-  - nosetests --with-coverage
+  - nosetests --with-coverage --cover-package=slacker_cli
   - flake8 slacker_cli tests
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then black --check --diff .; fi
 
 after_script:
   - coveralls --verbose
