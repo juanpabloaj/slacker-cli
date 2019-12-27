@@ -65,7 +65,7 @@ Contributors
 - `Alex Jurkiewicz <https://github.com/alexjurkiewicz>`_
 - `David Yen <https://github.com/davidyen1124>`_
 - `Ethan Erchinger <https://github.com/erchn>`_
-- `Hugo <https://github.com/hugovk>`_
+- `Hugo van Kemenade <https://github.com/hugovk>`_
 - `JuanPablo AJ <https://github.com/juanpabloaj>`_
 - `Kentaro Wada <https://github.com/wkentaro>`_
 - `Marc Abramowitz <https://github.com/msabramo>`_
