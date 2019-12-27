@@ -16,7 +16,7 @@ install_requires = read("requirements.txt").splitlines()
 
 setup(
     name="slacker-cli",
-    version="0.4.1",
+    version="0.4.2",
     description="Send messages to slack from command line",
     long_description=(read("README.rst")),
     url="https://github.com/juanpabloaj/slacker-cli",
