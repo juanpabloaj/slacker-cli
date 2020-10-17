@@ -2,21 +2,20 @@ language: python
 cache: pip
 
 python:
-  - 2.7
-  - 3.5
   - 3.6
   - 3.7
   - 3.8
-  - pypy
+  - 3.9-dev
+  - pypy3
 
 install:
   - pip install -r requirements-dev.txt
-  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then pip install -U black; fi
+  - pip install -U black
 
 script:
   - nosetests --with-coverage --cover-package=slacker_cli
   - flake8 slacker_cli tests
-  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then black --check --diff .; fi
+  - black --check --diff .
 
 after_script:
   - coveralls --verbose
