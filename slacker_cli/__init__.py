@@ -89,13 +89,13 @@ def args_to_dict(lst):
 
 def args_priority(args, environ):
     """
-        priority of token
-        1) as argumment: -t
-        2) as environ variable
+    priority of token
+    1) as argumment: -t
+    2) as environ variable
 
-        priority of as_user
-        1) as argument: -a
-        2) as environ variable
+    priority of as_user
+    1) as argument: -a
+    2) as environ variable
     """
 
     arg_token = args.token

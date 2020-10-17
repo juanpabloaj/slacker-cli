@@ -10,7 +10,6 @@ python:
 
 install:
   - pip install -r requirements-dev.txt
-  - pip install -U black
 
 script:
   - nosetests --with-coverage --cover-package=slacker_cli
