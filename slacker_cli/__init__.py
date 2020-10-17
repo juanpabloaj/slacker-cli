@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
     Send message to Slack from command line
 """
@@ -51,7 +50,7 @@ def post_message_as_slackbot(team, token, channel, message):
     url = url.format(team=team, token=token, channel=urllib_quote(channel))
     res = requests.post(url, message)
     if res.status_code != 200:
-        raise SlackerCliError("{0}:'{1}'".format(res.content, url))
+        raise SlackerCliError(f"{res.content}:'{url}'")
 
 
 def get_im_id(token, username):

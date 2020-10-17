@@ -1,8 +1,7 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 import unittest
-from mock import patch
+from unittest.mock import patch
 
 from slacker_cli import get_channel_id, get_im_id, get_item_by_key_value
 

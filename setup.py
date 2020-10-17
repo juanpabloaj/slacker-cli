@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 import os
 from setuptools import setup
@@ -7,7 +6,7 @@ from setuptools import setup
 
 def read(*paths):
     """ read files """
-    with open(os.path.join(*paths), "r") as filename:
+    with open(os.path.join(*paths)) as filename:
         return filename.read()
 
 
