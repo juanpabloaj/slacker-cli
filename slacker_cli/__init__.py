@@ -172,7 +172,7 @@ def main():
             icon,
             as_slackbot,
             team,
-            **kwargs
+            **kwargs,
         )
 
     if token and user and message:
