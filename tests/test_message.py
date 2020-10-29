@@ -1,8 +1,7 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 import unittest
-from mock import patch
+from unittest.mock import patch
 
 from slacker_cli import post_message, SlackerCliError
 
