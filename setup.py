@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
 import os
+
 from setuptools import setup
 
 
 def read(*paths):
-    """ read files """
+    """read files"""
     with open(os.path.join(*paths)) as filename:
         return filename.read()
 
@@ -34,5 +35,6 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
 )

@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import patch
 
-from slacker_cli import post_message, SlackerCliError
+from slacker_cli import SlackerCliError, post_message
 
 
 class TestMessage(unittest.TestCase):

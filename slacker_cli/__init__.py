@@ -3,17 +3,20 @@
     Send message to Slack from command line
 """
 
+import argparse
+import os
+import sys
+
+import requests
+
 from slacker import Slacker
 from slacker.utilities import get_item_id_by_name
-import requests
-import argparse
-import sys
-import os
 
 try:
     from urllib import quote as urllib_quote
 except ImportError:
     from urllib.parse import quote as urllib_quote
+
 import warnings
 
 warnings.filterwarnings("ignore", message=".*InsecurePlatformWarning.*")
@@ -68,7 +71,7 @@ def get_channel_id(token, channel_name):
 
 
 def upload_file(token, channel_name, file_name):
-    """ upload file to a channel """
+    """upload file to a channel"""
 
     slack = Slacker(token)
 
