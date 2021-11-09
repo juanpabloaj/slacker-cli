@@ -1,6 +1,6 @@
 #!/usr/bin/python
-from unittest import TestCase
 import argparse
+from unittest import TestCase
 
 from slacker_cli import args_priority
 

@@ -2,10 +2,10 @@
 slacker-cli
 ===========
 
-.. image:: https://travis-ci.org/juanpabloaj/slacker-cli.svg?branch=master
-    :target: https://travis-ci.org/juanpabloaj/slacker-cli
-.. image:: https://coveralls.io/repos/juanpabloaj/slacker-cli/badge.svg?branch=master
-    :target: https://coveralls.io/r/juanpabloaj/slacker-cli?branch=master
+.. image:: https://github.com/juanpabloaj/slacker-cli/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/juanpabloaj/slacker-cli/actions
+.. image:: https://codecov.io/gh/juanpabloaj/slacker-cli/branch/master/graph/badge.svg?token=xkOKL9Ysv4
+    :target: https://codecov.io/gh/juanpabloaj/slacker-cli
 
 Send messages to `Slack <https://slack.com/>`_ from command line.
 
