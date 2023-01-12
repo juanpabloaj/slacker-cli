@@ -6,18 +6,13 @@
 import argparse
 import os
 import sys
+import warnings
+from urllib.parse import quote
 
 import requests
 
 from slacker import Slacker
 from slacker.utilities import get_item_id_by_name
-
-try:
-    from urllib import quote as urllib_quote
-except ImportError:
-    from urllib.parse import quote as urllib_quote
-
-import warnings
 
 warnings.filterwarnings("ignore", message=".*InsecurePlatformWarning.*")
 
@@ -50,7 +45,7 @@ class SlackerCliError(Exception):
 def post_message_as_slackbot(team, token, channel, message):
     url = "https://{team}.slack.com/services/hooks/slackbot"
     url += "?token={token}&channel={channel}"
-    url = url.format(team=team, token=token, channel=urllib_quote(channel))
+    url = url.format(team=team, token=token, channel=quote(channel))
     res = requests.post(url, message)
     if res.status_code != 200:
         raise SlackerCliError(f"{res.content}:'{url}'")
